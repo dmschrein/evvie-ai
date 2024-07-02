@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+"use client"
+import React, { useState } from 'react'
 
 type InitialValuesProps = {
   currentStep: number
@@ -12,24 +13,27 @@ const InitialValues: InitialValuesProps = {
 
 const authContext = React.createContext(InitialValues)
 
-const { Provider } = authContext
+const { Provider } = authContext // provider coomponent is used to wrap parts of the application that need access to the context values
 
+// functional component that accepts 'children' as a prop. 'children' represents the nested components that will have access to the context values
+// useState - hook is used to create 'currentStep' state variable and 'setCurrentStep' function to update 'currentStep' 
+// custom hook to easily access the context values
 export const AuthContextProvider = ({
   children,
 }: {
-  chidren: React.ReactNode
+  children: React.ReactNode
 }) => {
   const [currentStep, setCurrentStep] = useState<number>(
     InitialValues.currentStep
   )
   const values = {
     currentStep,
-    setCurrentStep
+    setCurrentStep,
   }
   return <Provider value={values}>{children}</Provider>
 }
 
 export const useAuthContextHook = () => {
-  const state = React.useContext(authContext);
-  return state;
-};
+  const state = React.useContext(authContext)
+  return state
+}
