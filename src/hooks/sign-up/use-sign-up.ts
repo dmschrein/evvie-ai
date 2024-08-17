@@ -24,13 +24,14 @@ export const useSignUpForm = () => {
     },
     mode: "onChange",
   });
-
+  /* Generates a OTP */
   const onGenerateOTP = async (
     email: string,
     password: string,
     onNext: React.Dispatch<React.SetStateAction<number>>
   ) => {
     if (!isLoaded) return;
+    /* making an api request */
     try {
       await signUp.create({
         emailAddress: email,

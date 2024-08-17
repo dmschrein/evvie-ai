@@ -3,14 +3,19 @@ import { redirect } from "next/navigation";
 import React from "react";
 import Image from "next/image";
 
+/* A TypeScript type definition for the props that the `Layout` component will accept.
+Specifically, it expects a single prop called `children`, which can be any valid 
+React node (e.g. elements, components, text, etc)
+ */
 type Props = {
   children: React.ReactNode;
 };
 
+/* async React component that takes children as its prop. */
 const Layout = async ({ children }: Props) => {
-  const user = await currentUser();
+  const user = await currentUser(); /* Checks if a user is currently authenticated. */
 
-  if (user) redirect("/");
+  if (user) redirect("/"); /* If user is authenticated, the code redirects them to the home page*/
   return (
     <div className="h-screen flex w-full justify-center">
       <div className="w-[600px] ld:w-full flex flex-col items-start p-6">
